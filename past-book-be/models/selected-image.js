@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const SelectedImageSchema = new mongoose.Schema({
-  imageSequence: [{ type: String }],
+  imageSequence: [{ type: Number }],
   authorId: { type: String, required: true, unique: true },
   updatedAt: { type: Date },
 });

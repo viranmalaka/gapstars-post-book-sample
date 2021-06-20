@@ -17,8 +17,8 @@ router.get('/:authorId/selected-images', async (req, res, next) => {
   res.status(OK).json(selectedImage);
 });
 
-// append the given image to the author's selected images list
-router.post('/:authorId/selected-images/select', async (req, res, next) => {
+// create
+router.post('/:authorId/selected-images', async (req, res, next) => {
   const { imageSequence } = req.body;
   const { authorId } = req.params;
 
@@ -36,8 +36,8 @@ router.post('/:authorId/selected-images/select', async (req, res, next) => {
   return res.status(CREATED).json(savedEntry);
 });
 
-// reorder (sequence) the images list
-router.patch('/:authorId/selected-images/sequence', async (req, res, next) => {
+// add, remove, sequence the image list
+router.patch('/:authorId/selected-images', async (req, res, next) => {
   const { updatedImageSequence } = req.body;
   const { authorId } = req.params;
 
@@ -47,10 +47,10 @@ router.patch('/:authorId/selected-images/sequence', async (req, res, next) => {
   }, { upsert: true }));
 
   if (updateError) {
-    return res.status(BAD_REQUEST).json(updatedEntry);
+    return res.status(BAD_REQUEST).json(updateError);
   }
 
-  return res.status(updatedEntry);
+  return res.status(OK).json(updatedEntry);
 });
 
 module.exports = router;
