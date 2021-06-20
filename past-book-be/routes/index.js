@@ -6,7 +6,7 @@ const SelectedImages = require('../models/selected-image');
 const { to } = require('../utils/common-utils');
 
 // return selected image object for the given author
-router.get(':authorId/selected-images', async (req, res, next) => {
+router.get('/:authorId/selected-images', async (req, res, next) => {
   const { authorId } = req.params;
   const [findError, selectedImage] = await to(SelectedImages.findOne({ authorId }));
 
@@ -18,7 +18,7 @@ router.get(':authorId/selected-images', async (req, res, next) => {
 });
 
 // append the given image to the author's selected images list
-router.post(':authorId/selected-images/select', async (req, res, next) => {
+router.post('/:authorId/selected-images/select', async (req, res, next) => {
   const { imageSequence } = req.body;
   const { authorId } = req.params;
 
@@ -37,7 +37,7 @@ router.post(':authorId/selected-images/select', async (req, res, next) => {
 });
 
 // reorder (sequence) the images list
-router.patch(':authorId/selected-images/sequence', async (req, res, next) => {
+router.patch('/:authorId/selected-images/sequence', async (req, res, next) => {
   const { updatedImageSequence } = req.body;
   const { authorId } = req.params;
 
