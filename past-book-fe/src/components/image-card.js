@@ -14,6 +14,7 @@ const ImageCard = ({url, id, onSelectImage, onDeselectImage, isSelected, showSwi
           {showSwitch && <Switch onChange={onSelectionChanged} checked={isSelected} /> }
           {showDeleteBtn && <Button type="primary" shape="circle" icon={<DeleteOutlined />} onClick={() => onSelectionChanged(false)} /> }
         </div>
+        {id}
       </Card>
   );
 };

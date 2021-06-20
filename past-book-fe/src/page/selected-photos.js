@@ -43,16 +43,10 @@ const AllPhotos = ({ selectedImages }) => {
     }
   }, [selectedImages.data]);
 
-  const onAddImage = async (id) => {
-    const updatedImageSequence = [...selectedImages.data, id];
-    selectedImages.updateImageList(updatedImageSequence);
-  }
-
   const onRemoveImage = async (id) => {
     const updatedImageSequence = selectedImages.data.filter(imgId => imgId !== id);
     selectedImages.updateImageList(updatedImageSequence);
   }
-
 
   if (loading) {
     return <ThreeColumnDummyImageLoading />
@@ -65,9 +59,8 @@ const AllPhotos = ({ selectedImages }) => {
           url={image.picture}
           id={image.id}
           isSelected={isAvailableInArray(selectedImages.data, image.id)}
+          showDeleteBtn
           onDeselectImage={onRemoveImage}
-          onSelectImage={onAddImage}
-          showDeleteBtn={onRemoveImage}
         />
       </Col>)
       }
