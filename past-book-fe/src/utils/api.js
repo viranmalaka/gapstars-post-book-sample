@@ -23,4 +23,5 @@ const createAPI = (apiRoot) => {
 };
 
 const API = createAPI(API_ROOT);
+export const OutsideAPI = createAPI('');
 export default API;

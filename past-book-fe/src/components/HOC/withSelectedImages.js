@@ -13,7 +13,7 @@ const withSelectedImages = (WrapperComponent) => {
     }
 
     async componentDidMount() {
-      this.setState({ isFetching: true });
+      this.setState({ isFetching: true, onImageSequenceUpdate: this.notifyImageUpdates });
 
       const [err, data] = await API.get(`${STATIC_AUTHOR_ID}/selected-images`);
 
@@ -23,7 +23,27 @@ const withSelectedImages = (WrapperComponent) => {
         return;
       }
 
-      this.setState({ data: data || [], isFetching: false, hasError: false });
+      let selectedImageData;
+      if (data === null) {
+        // only execute at the first time, there's nothing on the DB for this user. so create one entry
+        const [createError] = await API.post(`${STATIC_AUTHOR_ID}/selected-images`, {
+          imageSequence: []
+        });
+        if (createError) {
+          message.error('Something went wrong. Failed to create entries');
+        }
+        selectedImageData = [];
+      } else {
+        selectedImageData = data.imageSequence;
+      }
+
+      this.setState({ data: selectedImageData, isFetching: false, hasError: false });
+    }
+
+    notifyImageUpdates = (newImageSequence) => {
+      this.setState({
+        data: newImageSequence,
+      })
     }
 
     render() {
