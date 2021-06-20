@@ -1,7 +1,7 @@
 import React from 'react';
 import withSelectedImages from "../components/HOC/withSelectedImages";
 
-const AllPhotos = ({ selectedImages }) => {
+const SelectedPhotos = ({ selectedImages }) => {
   return (
     <div>
       {JSON.stringify(selectedImages)}
@@ -9,4 +9,4 @@ const AllPhotos = ({ selectedImages }) => {
   );
 };
 
-export default withSelectedImages(AllPhotos);
+export default withSelectedImages(SelectedPhotos);
