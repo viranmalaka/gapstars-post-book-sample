@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import withSelectedImages from "../components/HOC/withSelectedImages";
 import API, { OutsideAPI } from "../utils/api";
-import {Col, Card, message, Row, Skeleton, Spin, Switch} from "antd";
+import {Col, message, Row } from "antd";
 import {STATIC_AUTHOR_ID, USER_IMAGES_URL} from "../utils/constants";
 import ImageCard from "../components/image-card";
 import ThreeColumnDummyImageLoading from "../components/three-column-dummy-image-loading";
-import {isAvailableInArray} from "../utils/common-utils";
+import { isAvailableInArray } from "../utils/common-utils";
 
 const AllPhotos = ({ selectedImages }) => {
 
@@ -31,30 +31,6 @@ const AllPhotos = ({ selectedImages }) => {
     })();
   }, []);
 
-  const updateImageList = async (updateSequence) => {
-    const [err] = await API.patch(`${STATIC_AUTHOR_ID}/selected-images`, {
-      updatedImageSequence: updateSequence,
-    });
-
-    if (err) {
-      message.error('Failed to update, Please try again');
-      return;
-    }
-
-    // use api results for more updated data (can be helped on concurrent edits)
-    selectedImages.onImageSequenceUpdate(updateSequence);
-  }
-
-  const onAddImage = async (id) => {
-    const updatedImageSequence = [...selectedImages.data, id];
-    updateImageList(updatedImageSequence);
-  }
-
-  const onRemoveImage = async (id) => {
-    const updatedImageSequence = selectedImages.data.filter(imgId => imgId !== id);
-    updateImageList(updatedImageSequence);
-  }
-
 
   if (loading) {
     return <ThreeColumnDummyImageLoading />
@@ -67,8 +43,8 @@ const AllPhotos = ({ selectedImages }) => {
           url={image.picture}
           id={image.id}
           isSelected={isAvailableInArray(selectedImages.data, image.id)}
-          onDeselectImage={onRemoveImage}
-          onSelectImage={onAddImage} />
+          showSwitch
+        />
         </Col>)
       }
     </Row>

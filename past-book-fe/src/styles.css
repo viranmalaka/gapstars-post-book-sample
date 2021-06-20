@@ -2,6 +2,10 @@
     height: 100%;
 }
 
+main.ant-layout-content.site-layout {
+    overflow: auto;
+}
+
 .no-body-antd-card .ant-card-body {
     padding: 0;
 }

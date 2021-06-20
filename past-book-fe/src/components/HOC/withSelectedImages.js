@@ -10,10 +10,11 @@ const withSelectedImages = (WrapperComponent) => {
       data: [],
       isFetching: false,
       hasError: false,
+      updateImageList: () => {}, // define dummy function for the consistency.
     }
 
     async componentDidMount() {
-      this.setState({ isFetching: true, onImageSequenceUpdate: this.notifyImageUpdates });
+      this.setState({ isFetching: true, updateImageList: this.updateImageList });
 
       const [err, data] = await API.get(`${STATIC_AUTHOR_ID}/selected-images`);
 
@@ -40,9 +41,19 @@ const withSelectedImages = (WrapperComponent) => {
       this.setState({ data: selectedImageData, isFetching: false, hasError: false });
     }
 
-    notifyImageUpdates = (newImageSequence) => {
+    updateImageList = async (updateSequence) => {
+      const [err] = await API.patch(`${STATIC_AUTHOR_ID}/selected-images`, {
+        updatedImageSequence: updateSequence,
+      });
+
+      if (err) {
+        message.error('Failed to update, Please try again');
+        return;
+      }
+
+      // use api results for more updated data (can be helped on concurrent edits)
       this.setState({
-        data: newImageSequence,
+        data: updateSequence
       })
     }
 
