@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MainRouter from "./page/main-router";
+import MainRouter from './page/main-router';
 
 function App() {
   return (

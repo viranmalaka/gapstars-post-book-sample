@@ -8,7 +8,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://127.0.0.1:27017/past-book', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

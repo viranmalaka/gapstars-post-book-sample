@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import withSelectedImages from '../components/HOC/withSelectedImages';
 import { OutsideAPI } from '../utils/api';
-import { Col, message, Row, Button, Drawer } from 'antd';
+import { Button, Col, Drawer, message, Row } from 'antd';
 import { USER_IMAGES_URL } from '../utils/constants';
 import ImageCard from '../components/image-card';
 import ThreeColumnDummyImageLoading from '../components/three-column-dummy-image-loading';
@@ -58,7 +58,7 @@ const SelectedPhotos = ({ selectedImages }) => {
           <Button onClick={() => showDrawer(true)}>Sequence</Button>
         </Col>
         {images.map((image) => (
-          <Col md={{span: 8}} xl={{span: 6}}  key={image.id}>
+          <Col md={{ span: 8 }} xl={{ span: 6 }} key={image.id}>
             <ImageCard
               url={image.picture}
               id={image.id}

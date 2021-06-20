@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, Table} from 'antd';
+import React, { useState } from 'react';
+import { Button, Table } from 'antd';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { MenuOutlined } from '@ant-design/icons';
 import arrayMove from 'array-move';
@@ -22,41 +22,35 @@ const columns = [
   {
     title: 'picture',
     dataIndex: 'picture',
-    render: (url) => <img className="drag-table-image" src={url} />
+    render: (url) => <img className="drag-table-image" src={url} alt={url} />,
   },
 ];
 
-const SortableItem = sortableElement(props => <tr {...props} />);
-const SortableContainer = sortableContainer(props => <tbody {...props} />);
+const SortableItem = sortableElement((props) => <tr {...props} />);
+const SortableContainer = sortableContainer((props) => <tbody {...props} />);
 
-const ImageSequenceTable = ({data, onChange}) => {
+const ImageSequenceTable = ({ data, onChange }) => {
   const [dataSource, setDataSource] = useState(data);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
-      const newData = arrayMove([].concat(dataSource), oldIndex, newIndex).filter(el => !!el);
-      setDataSource(newData)
+      const newData = arrayMove([].concat(dataSource), oldIndex, newIndex).filter((el) => !!el);
+      setDataSource(newData);
     }
   };
 
-  const DraggableContainer = props => (
-    <SortableContainer
-      useDragHandle
-      disableAutoscroll
-      helperClass="row-dragging"
-      onSortEnd={onSortEnd}
-      {...props}
-    />
+  const DraggableContainer = (props) => (
+    <SortableContainer useDragHandle disableAutoscroll helperClass="row-dragging" onSortEnd={onSortEnd} {...props} />
   );
 
   const DraggableBodyRow = ({ className, style, ...restProps }) => {
-    const index = dataSource.findIndex(x => x.id === restProps['data-row-key']);
+    const index = dataSource.findIndex((x) => x.id === restProps['data-row-key']);
     return <SortableItem index={index} {...restProps} />;
   };
 
   return (
     <>
-    <Table
+      <Table
         pagination={false}
         dataSource={dataSource}
         columns={columns}
@@ -68,9 +62,11 @@ const ImageSequenceTable = ({data, onChange}) => {
           },
         }}
       />
-      <Button block className="sequence-save-btn" type="primary" onClick={() => onChange(dataSource)}>Save</Button>
-      </>
-    );
-}
+      <Button block className="sequence-save-btn" type="primary" onClick={() => onChange(dataSource)}>
+        Save
+      </Button>
+    </>
+  );
+};
 
 export default ImageSequenceTable;

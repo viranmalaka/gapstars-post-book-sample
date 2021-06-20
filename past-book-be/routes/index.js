@@ -11,7 +11,7 @@ router.get('/:authorId/selected-images', async (req, res, next) => {
   const [findError, selectedImage] = await to(SelectedImages.findOne({ authorId }));
 
   if (findError) {
-    return res.status(INTERNAL_SERVER_ERROR).json({error: findError});
+    return res.status(INTERNAL_SERVER_ERROR).json({ error: findError });
   }
 
   res.status(OK).json(selectedImage);
@@ -31,7 +31,7 @@ router.post('/:authorId/selected-images', async (req, res, next) => {
   const [saveError, savedEntry] = await to(entry.save());
 
   if (saveError) {
-    return res.status(BAD_REQUEST).json({error: saveError});
+    return res.status(BAD_REQUEST).json({ error: saveError });
   }
   return res.status(CREATED).json(savedEntry);
 });
@@ -41,10 +41,16 @@ router.patch('/:authorId/selected-images', async (req, res, next) => {
   const { updatedImageSequence } = req.body;
   const { authorId } = req.params;
 
-  const [updateError, updatedEntry] = await to(SelectedImages.findOneAndUpdate({authorId}, {
-    imageSequence: updatedImageSequence,
-    updatedAt: Date.now(),
-  }, { upsert: true }));
+  const [updateError, updatedEntry] = await to(
+    SelectedImages.findOneAndUpdate(
+      { authorId },
+      {
+        imageSequence: updatedImageSequence,
+        updatedAt: Date.now(),
+      },
+      { upsert: true },
+    ),
+  );
 
   if (updateError) {
     return res.status(BAD_REQUEST).json(updateError);

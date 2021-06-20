@@ -47,7 +47,7 @@ const AllPhotos = ({ selectedImages }) => {
   return (
     <Row gutter={[25, 25]}>
       {images.map((image) => (
-        <Col md={{span: 8}} xl={{span: 6}} key={image.id}>
+        <Col md={{ span: 8 }} xl={{ span: 6 }} key={image.id}>
           <ImageCard
             url={image.picture}
             id={image.id}
