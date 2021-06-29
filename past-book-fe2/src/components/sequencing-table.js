@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
 

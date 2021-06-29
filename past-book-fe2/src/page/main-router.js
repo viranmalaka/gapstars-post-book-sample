@@ -33,7 +33,7 @@ const MainRouter = () => {
               <AllPhotos onImageCountChanged={setSelectedCount} />
             </Route>
             <Route path="/selected">
-              <SelectedPhotos />
+              <SelectedPhotos onImageCountChanged={setSelectedCount} />
             </Route>
             <Redirect from="/" to="/selected" />
           </Switch>

@@ -6,7 +6,7 @@ import { message } from "antd";
 import Drawer from "../components/drawer";
 import SequencingTable from "../components/sequencing-table";
 
-const SelectedPhotos = ({ selectedImages }) => {
+const SelectedPhotos = ({ selectedImages, onImageCountChanged }) => {
   const [loading, setLoading] = useState(false);
   const [imagesById, setImages] = useState({});
 
@@ -34,6 +34,10 @@ const SelectedPhotos = ({ selectedImages }) => {
         setLoading(false);
       }
     })();
+  }, [selectedImages.data]);
+
+  useEffect(() => {
+    onImageCountChanged(selectedImages.data.length);
   }, [selectedImages.data]);
 
   const handleCardSelectionChanged = () => {
