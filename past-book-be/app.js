@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const indexRouter = require('./routes/index');
+const uploadedImages = require('./routes/uploaded-images');
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.MONGO_URL, {
@@ -24,5 +25,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', indexRouter);
+app.use('/api/v1/uploaded-images', uploadedImages);
 
 module.exports = app;

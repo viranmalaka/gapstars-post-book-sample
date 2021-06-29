@@ -1,0 +1,91 @@
+.image-card {
+  -webkit-box-shadow: 6px 5px 13px 2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 6px 5px 13px 2px rgba(0,0,0,0.75);
+  box-shadow: 6px 5px 13px 2px rgba(0,0,0,0.75);
+
+  padding: 10px;
+  margin: 10px;
+
+  &:hover {
+    background-color: #a7adff;
+  }
+
+  &.selected {
+    background-color: #5151ff;
+  }
+
+  .image-area {
+    width: 300px;
+    height: 330px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .label {
+    text-align: center;
+    margin: 10px 0 5px 0;
+  }
+}
+
+.drawer {
+  .open-button {
+    position: fixed;
+    right: 0;
+    font-size: 25px;
+    top: 100px;
+    z-index: 10;
+  }
+
+  .content {
+    position: fixed;
+    right: 0;
+    top: 150px;
+    width: 300px;
+    height: 600px;
+    background: gray;
+    overflow: auto;
+
+    -webkit-box-shadow: -5px 6px 13px 2px rgba(0,0,0,0.54);
+    -moz-box-shadow: -5px 6px 13px 2px rgba(0,0,0,0.54);
+    box-shadow: -5px 6px 13px 2px rgba(0,0,0,0.54);
+    z-index: 10;
+  }
+
+  .backdrop {
+    position: fixed;
+    width: 99vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+}
+
+.sequencing-table {
+  padding: 10px;
+
+  .row {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #d3d3ff;
+    margin-bottom: 5px;
+
+    &:hover {
+      background: #9595ff;
+    }
+
+    .name {
+      font-size: 15px;
+      line-height: 32px;
+    }
+
+    .buttons {
+      .btn {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}
