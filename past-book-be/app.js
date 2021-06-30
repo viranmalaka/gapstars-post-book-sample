@@ -27,4 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/uploaded-images', uploadedImages);
 
+app.use('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
 module.exports = app;
